@@ -21,8 +21,8 @@ class Payment extends Model
         protected $allowIncluded=[
             'user',
             'course',
-        'user.role',
-    'course.category'];
+            'user.role',
+            'course.category'];
         protected $allowFilter=[
             'id',
             'monto',

@@ -23,7 +23,8 @@ class Comment extends Model
     protected $allowIncluded=[
         'user',
         'commentable',
-        'user.role'];
+        'user.role',
+    ];
     protected $allowFilter=[
         'id',
         'texto',
