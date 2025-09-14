@@ -18,9 +18,23 @@ class Payment extends Model
         'course_id'
     ];
 
-    protected $allowIncluded=['user','course'];
-    protected $allowFilter=['id','monto','metodo_pago','estado','created_at'];
-    protected $allowSort=['id','monto','metodo_pago','estado','created_at'];
+        protected $allowIncluded=[
+            'user',
+            'course',
+        'user.role',
+    'course.category'];
+        protected $allowFilter=[
+            'id',
+            'monto',
+            'metodo_pago',
+            'estado',
+            'created_at'];
+         protected $allowSort=[
+            'id',
+            'monto',
+            'metodo_pago',
+            'estado',
+            'created_at'];
 
      public function user()
     {

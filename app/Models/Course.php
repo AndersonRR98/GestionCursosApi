@@ -18,9 +18,27 @@ class Course extends Model
         'instructor_id',
         'category_id',
     ];
-    protected $allowIncluded=['category','users','lessons','payments','comments'];
-    protected $allowFilter=['id','titulo','descripcion','precio','created_at'];
-    protected $allowSort=['id','titulo','descripcion','precio','created_at'];
+    protected $allowIncluded=[
+        'category',
+        'users',
+        'lessons',
+        'payments',
+        'comments',
+        'users.payments',
+        'lessons.comments'
+        ];
+    protected $allowFilter=[
+        'id',
+        'titulo',
+        'descripcion',
+        'precio',
+        'created_at'];
+    protected $allowSort=[
+        'id',
+        'titulo',
+         'descripcion',
+         'precio',
+         'created_at'];
     
     public function category()
     {

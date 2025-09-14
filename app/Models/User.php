@@ -23,12 +23,30 @@ class User extends Model
         'rol_id'
     ];
 
-    protected $allowIncluded=['role','comments','payments','courses'];
-    protected $allowFilter=['id','nombre','email','password','activo','created_at'];
-    protected $allowSort=['id','nombre','email','password','activo','created_at'];
+    protected $allowIncluded=[
+        'role',
+        'comments',
+        'payments',
+        'courses',
+        'comments.commentable',
+        'courses.category',
+        'payments.course'
+    ];
+    protected $allowFilter=[
+        'id',
+        'nombre',
+        'email',
+        'password',
+        'activo',
+        'created_at'];
+    protected $allowSort=[
+        'id',
+        'nombre',
+        'email',
+        'password',
+        'activo',
+        'created_at'];
 
-
-    
     public function role()
     {
         return $this->belongsTo(Role::class ,'rol_id');

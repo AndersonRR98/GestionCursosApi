@@ -1,0 +1,9 @@
+endpoints para postman 
+
+ http://127.0.0.1:8000/api/categories?included=courses.users.role&filter[nombre]=doloremque&sort=-created_at&perPage=10
+
+
+http://127.0.0.1:8000/api/comments?included=user.role,commentable&filter[texto]=A aperiam voluptatem qui ipsa et qui voluptates.&sort=-created_at&perPage=10
+
+
+ http://127.0.0.1:8000/api/courses?included=category.users.payments.lessons.comments&filter[titulo]=ullam&sort=-created_at&perPage=10

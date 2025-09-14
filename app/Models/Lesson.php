@@ -17,11 +17,19 @@ class Lesson extends Model
         'course_id',
     ];
 
-    protected $allowIncluded=['course','comments'];
-    protected $allowFilter=['id','titulo','contenido','created_at'];
-    protected $allowSort=['id','titulo','contenido','created_at'];
-
-
+    protected $allowIncluded=[
+        'course',
+        'comments',
+         'course.category',
+        'course.users'];
+    protected $allowFilter=['id',
+         'titulo',
+         'contenido',
+         'created_at'];
+    protected $allowSort=['id',
+           'titulo',
+           'contenido',
+          'created_at'];
 
      public function course()
     {

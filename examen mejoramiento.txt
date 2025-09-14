@@ -1,0 +1,17 @@
+SELECT 
+    egresados.id,
+    egresados.nombre,
+    egresados.telefono,
+    egresados.correo,
+    empresa_egresados.Es_Actual,
+    empresa_egresados.Area_empresa
+FROM egresados
+JOIN empresa_egresados ON egresados.id = empresa_egresados.id;
+
+SELECT * 
+FROM egresados 
+WHERE id = (
+    SELECT id 
+    FROM egresado 
+    WHERE id = 5
+);

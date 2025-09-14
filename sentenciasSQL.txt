@@ -1,0 +1,154 @@
+tipos de datos para factorys 
+
+Texto y cadenas:       word,    sentence,     paragraph,    text,     slug,    uuid
+Números:     randomNumber,    numberBetween,      randomDigit,      randomFloat
+Booleanos:     boolean
+Enumeraciones y sets:      randomElement,      randomElements
+Fechas y tiempos: date,     time,      dateTime,      unixTime,      dateTimeBetween,       dateTimeThisMonth,      dateTimeThisYear
+Internet: safeEmail,     unique()->safeEmail,    email,    url,     domainName,     ipv4,    ipv6,    userName,      password
+Personas: name,    firstName,      firstNameMale,      firstNameFemale,     lastName,     title,     phoneNumber,     numerify
+Direcciones y localización: address,       streetAddress,     city,     state,      country,     postcode,     latitude,     longitude
+Archivos e imágenes:     imageUrl,     image,      fileExtension,     mimeType
+Financieros: randomFloat,     creditCardNumber,     iban,      currencyCode
+Datos únicos y opcionales: unique(),      optional()    , nullable()
+Claves foráneas y relaciones: User::factory(), ->for(User::class),    has(),    belongsTo()
+Polimórficos: imageable_id,     imageable_type
+Otros: state(),    sequence(),     valores personalizados (callback),    faker() con expresiones personalizadas
+
+
+sentencias DML
+
+insert 
+INSERT INTO clientes (nombre, email) VALUES ('Juan Pérez', 'juan@example.com');
+
+select 
+SELECT nombre, email FROM clientes WHERE id = 1;
+
+update
+UPDATE clientes SET email = 'nuevo@example.com' WHERE id = 1;
+
+delete 
+DELETE FROM clientes WHERE id = 1;
+
+inner join
+
+SELECT clientes.nombre, pedidos.fecha, pedidos.total
+FROM clientes
+INNER JOIN pedidos
+ON clientes.id_cliente = pedidos.id_cliente;
+
+SELECT c.nombre, p.fecha, p.total
+FROM clientes c
+INNER JOIN pedidos p
+ON c.id_cliente = p.id_cliente;
+
+
+select con multiples join 
+SELECT c.nombre, p.fecha, pr.nombre_producto, pr.precio
+FROM clientes c
+INNER JOIN pedidos p ON c.id_cliente = p.id_cliente
+INNER JOIN productos pr ON p.id_pedido = pr.id_pedido;
+
+
+
+SELECT clientes.nombre, pedidos.fecha, pedidos.total
+FROM clientes
+LEFT JOIN pedidos
+ON clientes.id_cliente = pedidos.id_cliente;
+   
+SELECT clientes.nombre, pedidos.fecha, pedidos.total
+FROM clientes
+INNER JOIN pedidos
+ON clientes.id_cliente = pedidos.id_cliente
+WHERE pedidos.total > 100;
+
+
+
+sentencia DDL 
+
+create 
+CREATE TABLE clientes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100),
+    email VARCHAR(100)
+);
+
+
+
+
+consultas basicas eloquent with 
+
+$egresados = Egresado::with('titulosAcademicos')->get();
+
+multiples relaciones 
+$egresados = Egresado::with(['titulosAcademicos', 'areasConocimiento'])->get();
+
+relaciones anidadas 
+$egresados = Egresado::with('titulosAcademicos.colegio')->get();
+
+ordenar relaciones 
+$egresados = Egresado::with(['titulosAcademicos' => function($query){
+    $query->orderBy('fecha', 'desc');
+}])->get();
+
+
+
+consultas examen practica 
+join sql 
+SELECT users.primer_nombre, users.segundo_nombre,
+users.primer_apellido,users.segundo_apellido,
+users.email,users.password,users.activo,
+users.rol_id,roles.nombre,roles.permisos 
+FROM users 
+INNER JOIN roles ON users.rol_id = roles.id;
+
+SELECT * 
+FROM users
+WHERE id = (
+    SELECT id 
+    FROM users
+    WHERE id = 5
+);
+
+
+
+SELECT users.id, users.nombre, users.email,users.password,
+users.activo,users.rol_id, courses.id,courses.titulo,courses.descripcion,
+courses.precio,courses.instructor_id,courses.category_id 
+FROM users 
+INNER JOIN courses 
+ON users.id = courses.instructor_id;
+
+
+
+SELECT users.id, users.nombre, users.email,users.password,
+users.activo,users.rol_id, courses.id,courses.titulo,courses.descripcion,
+courses.precio,courses.instructor_id,courses.category_id 
+FROM users 
+INNER JOIN courses ON users.id = courses.id;
+
+
+
+SELECT users.id, users.nombre, users.email, users.password,
+users.activo,rol_id, roles.id, roles.nombre, roles.permisos
+FROM users 
+INNER JOIN roles ON users.rol_id = roles.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+ 

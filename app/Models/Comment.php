@@ -20,9 +20,19 @@ class Comment extends Model
         'commentable_type'
         
     ];
-    protected $allowIncluded=['user','commentable'];
-    protected $allowFilter=['id','texto','created_at'];
-    protected $allowSort=['id','texto','created_at'];
+    protected $allowIncluded=[
+        'user',
+        'commentable',
+        'user.role'];
+    protected $allowFilter=[
+        'id',
+        'texto',
+        'created_at'];
+    protected $allowSort=[
+        'id',
+        'texto',
+        'created_at',
+        ];
 
     public function user()
     {

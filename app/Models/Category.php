@@ -13,8 +13,18 @@ class Category extends Model
       protected $fillable = [
         'nombre',
     ];
-    protected $allowIncluded=['courses'];
-    protected $allowFilter=['id','nombre','courses.titulo','created_at'];
+    protected $allowIncluded=[
+        'courses',
+        'courses.users.role',
+        'courses.comments',
+        'courses.lessons',
+        'courses.payments'];
+
+    protected $allowFilter=[
+        'id',
+        'nombre',
+        'created_at'];
+        
     protected $allowSort=['id','nombre','created_at'];
 
     public function courses()

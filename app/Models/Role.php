@@ -16,9 +16,20 @@ class Role extends Model
         'permisos',
         
     ];
-     protected $allowIncluded=['users','users.courses'];
-    protected $allowFilter=['id','nombre','permisos','created_at'];
-    protected $allowSort=['id','nombre','permisos','created_at'];
+         protected $allowIncluded=[
+            'users',
+            'users.courses',
+            'users.payments'];
+         protected $allowFilter=[
+            'id',
+            'nombre',
+            'permisos',
+            'created_at'];
+        protected $allowSort=[
+            'id',
+            'nombre',
+            'permisos',
+            'created_at'];
 
 
       public function users()
