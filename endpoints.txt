@@ -1,0 +1,25 @@
+http://127.0.0.1:8000/v1/publications?included=users.role
+
+http://127.0.0.1:8000/v1/publications?filter[id]=1
+
+http://127.0.0.1:8000/v1/roles?included=users
+
+http://127.0.0.1:8000/v1/roles?included=users&filter[nombre]=Admin&sort=-id&perPage=2
+
+http://127.0.0.1:8000/v1/sellers?included=user&filter[create_at]=2025-09-09 00:30:39&sort=-id&perPage=2
+
+http://127.0.0.1:8000/v1/publications?included=users.role&filter[id]=2&sort=-titulo&perPage=1
+
+http://127.0.0.1:8000/v1/publications?included=users.role&filter[id]=1&sort=-titulo&perPage=2
+
+http://127.0.0.1:8000/v1/images?filter[imageable_type]=App\\Models\\Publication
+
+http://127.0.0.1:8000/v1/images?included=imageable&filter[id]=2
+
+http://127.0.0.1:8000/v1/complaints?included=user.publications.coments
+
+http://127.0.0.1:8000/v1/complaints?included=publication.images.imageable
+
+http://127.0.0.1:8000/v1/complaints?included=user&filter[id]=1&sort=descripcion_adicional&perPage=2
+
+http://127.0.0.1:8000/v1/coments?included=user&filter[id]=2&sort=-valor_estrella&perPage=1

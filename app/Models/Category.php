@@ -25,7 +25,10 @@ class Category extends Model
         'nombre',
         'created_at'];
         
-    protected $allowSort=['id','nombre','created_at'];
+    protected $allowSort=[
+        'id',
+        'nombre',
+        'created_at'];
 
     public function courses()
     {
