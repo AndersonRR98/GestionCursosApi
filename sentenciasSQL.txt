@@ -137,7 +137,58 @@ INNER JOIN roles ON users.rol_id = roles.id;
 
 
 
+dominio 
+C:\xampp\apache\conf\extra
 
+<VirtualHost *>
+  DocumentRoot "C:\xampp\htdocs"
+  ServerName localhost
+</VirtualHost>
+
+<VirtualHost *>
+  DocumentRoot "C:\xampp\htdocs\api.codersfree\public"
+  ServerName api.codersfree.test
+  <Directory "C:\xampp\htdocs\api.codersfree\public">
+        Options All
+    AllowOverride All
+    Require all granted
+  </Directory>
+</VirtualHost>
+
+
+C:\Windows\System32\drivers\etc.
+
+
+127.0.0.1       api.bloger.test
+
+
+php artisan make:provider RouteServiceProvider
+
+
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
+
+class RouteServiceProvider extends ServiceProvider
+{
+    public function boot(): void
+    {
+        $this->mapApiRoutes();
+    }
+
+    protected function mapApiRoutes(): void
+    {
+        Route::prefix('api')
+            ->middleware('api')
+            ->group(base_path('routes/api.php'));
+    }
+}
+
+
+http://api.bloger.test/v1/categories
 
 
 
