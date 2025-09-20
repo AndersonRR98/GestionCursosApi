@@ -21,6 +21,12 @@ sentencias DML
 insert 
 INSERT INTO clientes (nombre, email) VALUES ('Juan Pérez', 'juan@example.com');
 
+INSERT INTO comments (body, commentable_id, commentable_type)
+VALUES ('Muy buen artículo!', 5, 'App\\Models\\Post');
+
+INSERT INTO reviews (review, user_id, product_id)
+VALUES ('Muy buen producto', 1, 1);
+
 select 
 SELECT nombre, email FROM clientes WHERE id = 1;
 
