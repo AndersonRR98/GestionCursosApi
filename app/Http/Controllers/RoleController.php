@@ -31,9 +31,8 @@ class RoleController extends Controller
         return response()->json($role, 201);
     }
 
-   public function show($id)
+   public function show(Role $role)
     {
-        $role = Role::with(['users'])->findOrFail($id);
         return response()->json($role);
     }
 

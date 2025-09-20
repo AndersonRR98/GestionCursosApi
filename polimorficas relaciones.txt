@@ -1,0 +1,83 @@
+ejemplo de una relacion polimorfica de muchos a muchos 
+
+tabla tags se conecta con post, video, productos y se crea una intermedia llamada taggeable 
+
+Schema::create('tags', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->timestamps();
+});
+
+Schema::create('taggables', function (Blueprint $table) {
+    $table->unsignedBigInteger('tag_id');
+    $table->morphs('taggable');
+});
+
+public function tags()
+{
+    return $this->morphToMany(Tag::class, 'taggable');
+}
+
+// Modelo Video
+public function tags()
+{
+    return $this->morphToMany(Tag::class, 'taggable');
+}
+
+// Modelo Tag
+public function posts()
+{
+    return $this->morphedByMany(Post::class, 'taggable');
+}
+
+public function videos()
+{
+    return $this->morphedByMany(Video::class, 'taggable');
+}
+
+
+
+insercion de datos 
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Post;
+use App\Models\Video;
+use App\Models\Tag;
+
+class TaggableFactory extends Factory
+{
+    protected $model = \App\Models\Taggable::class; // si no tienes modelo explícito, puedes dejarlo sin asignar
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        // Elegir aleatoriamente un Post o un Video
+        $taggableModels = [
+            Post::class => Post::inRandomOrder()->first() ?? Post::factory()->create(),
+            Video::class => Video::inRandomOrder()->first() ?? Video::factory()->create(),
+        ];
+
+        $taggableType = $this->faker->randomElement(array_keys($taggableModels));
+        $taggable = $taggableModels[$taggableType];
+
+        // Tag existente o nuevo
+        $tag = Tag::inRandomOrder()->first() ?? Tag::factory()->create();
+
+        return [
+            'tag_id' => $tag->id,
+            'taggable_id' => $taggable->id,
+            'taggable_type' => $taggableType,
+        ];
+    }
+}
+
+
+Tag::factory(10)->create(); // primero creo 10 tags
+\App\Models\Taggable::factory(20)->create(); // luego asigno 20 registros aleatorios en la pivote
